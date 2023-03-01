@@ -1,0 +1,13 @@
+@model ToDoList.Models.Tarefa;
+
+<div class="d-flex flex-row align-items-center">
+    <form asp-action="Adicionar" class="d-flex flex-row align-items-center justify-content-center  w-100">
+        <input asp-for="Descricao" type="text" class="form-control form-control-lg mw-75" id="exampleFormControlInput1" placeholder="Criar nova tarefa"/>
+        <input type="checkbox" asp-for="Completo" class="form-check-input" />
+        <div class="mw-45">
+            <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
+                class="fas fa-calendar-alt fa-lg me-3"></i></a>
+            <button type="submit" class="btn btn-primary">Criar</button>
+        </div>
+    </form>
+</div>

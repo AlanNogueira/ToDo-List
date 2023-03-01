@@ -1,0 +1,84 @@
+@model List<ToDoList.Models.Tarefa>;
+
+@{
+    ViewData["Title"] = "Adicionar";
+}
+
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
+          <div class="card-body py-4 px-4 px-md-5">
+
+            <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
+              <i class="fas fa-check-square me-1"></i>
+              <u>ToDo</u>
+            </p>
+
+            <div class="pb-2">
+              <div class="card">
+                <div class="card-body">
+                  @Html.Partial("_Form", new Tarefa{})
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
+              <p class="small mb-0 me-2 text-muted">Filtro</p>
+              <select class="select">
+                <option value="1">Todos</option>
+                <option value="2">Completos</option>
+                <option value="3">Ativo</option>
+                <option value="4">Data de validade</option>
+              </select>
+              <p class="small mb-0 ms-4 me-2 text-muted">Organizar</p>
+              <select class="select">
+                <option value="1">Data de adição</option>
+                <option value="2">Data de validade</option>
+              </select>
+              <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip" title="Ascending"><i
+                  class="fas fa-sort-amount-down-alt ms-2"></i></a>
+            </div>
+
+            @foreach (var item in Model)
+            {
+                <ul class="list-group list-group-horizontal rounded-0 mb-2">
+                    <li
+                        class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
+                        <div class="form-check">
+                        @Html.CheckBoxFor(Model => item.Completo , new { @class = "form-check-input me-0", @type = "checkbox", @disabled = true, @id = "flexCheckChecked3"})
+                        </div>
+                    </li>
+                    <li
+                        class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                        @{
+                          if (item.Completo)
+                          {
+                            <p class="lead fw-normal mb-0 bg-light w-100 ms-n2 ps-2 py-1 rounded"><del>@item.Descricao</del></p>
+                          }
+                          else
+                          {
+                            <p class="lead fw-normal mb-0 bg-light w-100 ms-n2 ps-2 py-1 rounded">@item.Descricao</p>
+                          }
+                        }
+                    </li>
+                    <div class="d-flex flex-column align-content-end justify-content-end mb-1">
+                        <a asp-action="Editar" asp-route-id="@item.Id">Editar</a>
+                        <a asp-action="Excluir" asp-route-id="@item.Id">Excluir</a>
+                        @* <a asp-action="Editar" asp-route-id="@item.Id" title="Edit todo"><i
+                            class="fa fa-pencil"></i></a>
+                        <a asp-action="Excluir" asp-route-id="@item.Id" title="Delete todo"><i
+                            class="fa fa-trash"></i></a> *@
+                    </div>
+                </ul>
+            }
+        
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
